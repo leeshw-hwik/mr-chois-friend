@@ -6,8 +6,8 @@ compatibility_date = "2025-09-01"
 # 상담 신청 저장소. database_id는 `npx wrangler d1 create mr-chois-friend-db` 결과 값으로 바꾼다.
 [[d1_databases]]
 binding = "DB"
-database_name = "mr-chois-friend-db"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_name = "consulting-db"
+database_id = "b21efb4f-0544-4d01-880f-3fe9184d748a"
 migrations_dir = "migrations"
 
 # 비밀 값·환경별 값은 이 파일에 쓰지 않는다(README 배포 절차 참고).
