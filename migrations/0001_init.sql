@@ -11,7 +11,8 @@ CREATE TABLE consultations (
                     CHECK (status IN ('new', 'planned', 'done')),
   status_updated_at TEXT,                            -- 상태 바꾼 일시(UTC)
   email_status      TEXT    NOT NULL DEFAULT 'pending'
-                    CHECK (email_status IN ('pending', 'sent', 'failed'))
+                    CHECK (email_status IN ('pending', 'sent', 'failed')),
+  interests_detail  TEXT                               -- 보장분석 체크 항목(쉼표 구분)
 );
 
 CREATE INDEX idx_consultations_created_at ON consultations (created_at DESC);

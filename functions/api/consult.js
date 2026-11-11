@@ -39,10 +39,10 @@ export async function onRequestPost({ request, env, waitUntil }) {
   if (dup) return fail(429, '이미 접수된 신청이 있습니다. 잠시 후 다시 시도해 주세요.');
 
   const row = await env.DB.prepare(
-    `INSERT INTO consultations (created_at, name, phone, age_group, interests, message)
-     VALUES (?, ?, ?, ?, ?, ?) RETURNING *`,
+    `INSERT INTO consultations (created_at, name, phone, age_group, interests, interests_detail, message)
+     VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`,
   )
-    .bind(now.toISOString(), v.name, v.phone, v.ageGroup, v.interests, v.message)
+    .bind(now.toISOString(), v.name, v.phone, v.ageGroup, v.interests, v.interestsDetail, v.message)
     .first();
 
   // 메일은 응답을 보낸 뒤 처리한다. 실패해도 신청은 저장되어 있고 관리자 화면에 발송 실패로 보인다.

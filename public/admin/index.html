@@ -212,6 +212,7 @@
         field('연락처',h('a',{href:'tel:'+item.phone.replace(/-/g,'')},item.phone)),
         field('연령대',item.ageGroup),
         field('상담 분야',item.interests||'선택 안 함'),
+        field('보장분석 체크 항목',item.interestsDetail||'(없음)'),
         field('문의 내용',item.message||'(없음)'),
         field('상태',item.statusLabel,item.statusUpdatedAt?h('span',{class:'sub'},kst(item.statusUpdatedAt)+' 변경'):null),
         field('메일 알림',mailText),

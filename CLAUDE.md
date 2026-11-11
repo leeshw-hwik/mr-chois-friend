@@ -17,7 +17,7 @@ AI 페르소나(`AGENTS.md`, 세션 시작 때 자동으로 불러옴):
 - `functions/` — Pages Functions. 파일 경로가 곧 URL(`functions/api/consult.js` → `POST /api/consult`)
   - `api/admin/_middleware.js`, `admin/_middleware.js` — 관리자 인증(Access 토큰 검증)
 - `lib/` — Functions 공용 코드: `constants.js`(선택지·글자 수·상태 이름), `validate.js`, `email.js`, `access.js`, `retention.js`(개인정보 보유 기간), `format.js`, `consultation.js`
-- `migrations/` — D1 스키마. 스키마를 바꿀 때는 기존 파일을 고치지 않고 새 번호 파일을 추가한다
+- `migrations/` — D1 스키마(`0001_init.sql`). 운영 DB 변경은 사용자가 직접 하므로, 스키마가 바뀌면 이 파일만 맞춰 고친다
 - `wrangler.toml` — Pages·D1 설정. 비밀 값은 넣지 않는다
 - `index.html` 섹션 순서(앵커 id): `#home` → `#about` → `#services` → `#pension` → `#coverage` → `#contact`(상담신청) → 푸터(보험 광고 고지) + 떠 있는 "무료 상담" 버튼. 섹션을 바꾸면 `nav ul`도 함께 고친다
 - `index.html` JS: 나이대 탭, 보장분석 체크 결과, `preset(v)`(상담 분야 미리 선택), 문의 글자 수, Turnstile 표시(`onTurnstileLoad`), `sendForm()`(`POST /api/consult`)
@@ -31,7 +31,8 @@ AI 페르소나(`AGENTS.md`, 세션 시작 때 자동으로 불러옴):
 - 반응형 기준점은 `max-width:860px` 하나다. 새 요소도 이 기준점에서 모바일 배치를 함께 만든다. 모바일에서 가로 스크롤이 생기지 않게 한다.
 - 한국어 줄바꿈은 `word-break:keep-all`(body 기본값)을 유지한다.
 - 외부 리소스는 Pretendard CDN, Turnstile 스크립트, Resend API만 쓴다. 새 라이브러리·CDN·서비스·빌드 도구를 추가하지 않는다. 필요하면 먼저 묻는다.
-- 폼 선택지(연령대·상담 분야)는 `public/index.html`과 `lib/constants.js`에 함께 있다. 바꿀 때는 둘 다 바꾼다.
+- 폼 선택지(연령대·상담 분야)와 보장분석 체크 항목(`#coverage .chk`의 `<b>` 글자)은 `public/index.html`과 `lib/constants.js`(`COVERAGE_ITEMS`)에 함께 있다. 바꿀 때는 둘 다 바꾼다.
+- 보장분석 체크 항목은 신청서의 상담 분야 아래에 표시하고, 문의 내용과 따로 `interests_detail` 컬럼(쉼표 구분)에 저장한다. 사용자 문의 입력란과 500자 제한에는 넣지 않는다.
 
 ## 보험 광고·개인정보 주의
 
@@ -52,7 +53,7 @@ AI 페르소나(`AGENTS.md`, 세션 시작 때 자동으로 불러옴):
 ```bash
 npm install
 cp .dev.vars.example .dev.vars   # 처음 1회
-npm run db:migrate:local         # 처음 1회, 스키마 바뀌면 다시
+npm run db:migrate:local         # 처음 1회, 스키마나 database_id가 바뀌면 다시
 npm run dev                      # http://localhost:8788
 npm run preview:email            # 메일 미리보기 → .wrangler/email-preview.html
 ```
