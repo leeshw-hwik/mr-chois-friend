@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김광열 팀장 | 20년 보험 전문 상담</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --navy:#0f2a47; --navy2:#173a60; --accent:#e8792b; --teal:#1f8a8a;
+    --bg:#f6f7f9; --card:#fff; --text:#1c2430; --muted:#5d6878; --line:#e3e7ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--text);background:var(--bg);line-height:1.65;word-break:keep-all}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(15,42,71,.97);color:#fff}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-weight:800;font-size:18px;letter-spacing:-.3px}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:15px}
+  nav a{opacity:.85}
+  nav a:hover{opacity:1;color:var(--accent)}
+  nav a.new::after{content:"NEW";font-size:9px;font-weight:800;background:var(--accent);color:#fff;border-radius:4px;padding:1px 4px;margin-left:4px;vertical-align:top}
+  .menu-btn{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:80px 0 70px}
+  .hero .badge{display:inline-block;background:rgba(232,121,43,.18);color:#ffb27a;border:1px solid rgba(232,121,43,.4);padding:5px 12px;border-radius:20px;font-size:13px;margin-bottom:18px}
+  .hero h1{font-size:38px;line-height:1.3;font-weight:800;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{font-size:17px;opacity:.85;max-width:620px}
+  .hero-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:700;font-size:15px;border:0;cursor:pointer}
+  .btn-main{background:var(--accent);color:#fff}
+  .btn-ghost{border:1px solid rgba(255,255,255,.5);color:#fff}
+  .year-end{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:700px}
+  .year-end a{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 18px;display:block}
+  .year-end a:hover{background:rgba(255,255,255,.14)}
+  .year-end b{display:block;font-size:16px;margin-bottom:2px}
+  .year-end small{opacity:.75;font-size:13px}
+
+  /* SECTION */
+  section{padding:80px 0}
+  section.alt{background:#fff}
+  .sec-head{margin-bottom:36px}
+  .sec-head .kicker{color:var(--accent);font-weight:800;font-size:13px;letter-spacing:1px}
+  .sec-head h2{font-size:30px;font-weight:800;line-height:1.35;margin:6px 0 10px}
+  .sec-head p{color:var(--muted);font-size:16px;max-width:720px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+  section.alt .card{background:var(--bg)}
+  .card h3{font-size:18px;margin-bottom:8px}
+  .card p,.card li{color:var(--muted);font-size:15px}
+  .card ul{padding-left:18px}
+  .icon{width:44px;height:44px;border-radius:12px;background:#fff1e6;color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+
+  /* ABOUT */
+  .about{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+  .profile-box{background:linear-gradient(160deg,var(--navy),var(--teal));color:#fff;border-radius:20px;padding:34px}
+  .profile-box .name{font-size:28px;font-weight:800}
+  .profile-box .role{opacity:.85;margin-bottom:20px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .stats div{background:rgba(255,255,255,.12);border-radius:12px;padding:12px;text-align:center}
+  .stats b{display:block;font-size:22px}
+  .stats small{font-size:12px;opacity:.85}
+  .awards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .awards div{background:rgba(255,255,255,.95);color:var(--navy);border-radius:12px;padding:12px 6px;text-align:center;font-size:20px}
+  .awards b{display:block;font-size:13.5px;margin-top:4px}
+  .awards small{font-size:11.5px;color:var(--muted)}
+  .about-lead{font-size:16px;color:var(--text);margin-bottom:22px;line-height:1.75}
+  .timeline li.award::before{background:#f0b429;box-shadow:0 0 0 4px #fff4d6}
+  .timeline li.award b{color:var(--navy)}
+  .timeline{list-style:none;border-left:2px solid var(--line);padding-left:20px}
+  .timeline li{position:relative;margin-bottom:18px}
+  .timeline li::before{content:"";position:absolute;left:-27px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+  .timeline b{display:block}
+  .timeline span{color:var(--muted);font-size:14px}
+
+  /* PENSION */
+  .pension-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;margin-bottom:28px}
+  .why-list{display:grid;gap:12px}
+  .why-item{display:flex;gap:14px;background:var(--bg);border-radius:14px;padding:16px 18px}
+  .why-item .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .why-item b{display:block}
+  .why-item span{color:var(--muted);font-size:14px}
+  .gap-box{background:var(--navy);color:#fff;border-radius:18px;padding:26px}
+  .gap-box h3{font-size:18px;margin-bottom:14px}
+  .bar-row{margin-bottom:14px}
+  .bar-row .lbl{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px;opacity:.9}
+  .bar{height:14px;border-radius:7px;background:rgba(255,255,255,.12);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:7px}
+  .gap-box .note{font-size:12px;opacity:.65;margin-top:10px}
+
+  /* 추천 연금 */
+  .pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pick{background:#fff;border:1px solid #f3dcc8;border-radius:16px;padding:22px;position:relative}
+  .lock{display:inline-block;font-size:12.5px;font-weight:700;background:#1c2430;color:#fff;border-radius:20px;padding:4px 11px;margin-bottom:12px;filter:none}
+  .pick-type{font-size:13px;font-weight:800;color:var(--teal);margin-bottom:4px}
+  .pick .big{font-size:40px;font-weight:900;color:var(--navy);line-height:1.15;margin-bottom:14px}
+  .pick .big span{color:var(--accent)}
+  .pick .big small{display:block;font-size:14px;color:var(--muted);font-weight:600;margin-top:4px}
+  .pick ul{list-style:none;display:grid;gap:8px}
+  .pick li{background:var(--bg);border:0;border-radius:10px;padding:10px 12px;font-size:14.5px}
+  .why-now{margin-top:18px;background:#fff;border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
+  .why-now p{color:var(--muted);font-size:15px;margin-top:6px}
+  .why-now p b{color:var(--text)}
+  .pick-cta{margin-top:18px;background:var(--navy);color:#fff;border-radius:16px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .pick-cta b{display:block;font-size:19px}
+  .pick-cta span{font-size:14px;opacity:.8}
+  .btn-big{background:var(--accent);color:#fff;font-size:18px;padding:16px 30px;border-radius:14px;box-shadow:0 6px 18px rgba(232,121,43,.45);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+  @media(max-width:860px){.pick-grid{grid-template-columns:1fr}.btn-big{width:100%;text-align:center}}
+
+  /* 니즈환기 */
+  .need{display:flex;gap:20px;background:var(--bg);border-radius:20px;padding:28px;margin-bottom:18px}
+  .need-no{flex:none;font-size:34px;font-weight:900;color:var(--accent);line-height:1}
+  .need-body{flex:1;min-width:0}
+  .need h3{font-size:21px;line-height:1.4;margin-bottom:14px}
+  .need-grid{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center}
+  .need-text{color:var(--muted);font-size:15.5px;margin-bottom:10px}
+  .need-text b{color:var(--text)}
+  .src{font-size:12px;color:#8a94a3;margin-top:8px}
+  .big-stat{text-align:center}
+  .big-stat p{font-size:15px;margin-top:10px}
+  .donut{--p:50;width:150px;height:150px;border-radius:50%;margin:0 auto;background:conic-gradient(var(--accent) calc(var(--p)*1%),#dfe4ea 0);display:flex;align-items:center;justify-content:center;position:relative}
+  .donut::before{content:"";position:absolute;inset:22px;background:var(--bg);border-radius:50%}
+  .donut span{position:relative;font-size:28px;font-weight:900;color:var(--navy)}
+  .gap-table{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:6px 0 14px}
+  .gt-row{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;border-top:1px solid var(--line);font-size:15px}
+  .gt-row span{padding:11px 14px;text-align:center}
+  .gt-row span:first-child{text-align:left;font-weight:600}
+  .gt-head{background:var(--navy);color:#fff;font-weight:700;border-top:0}
+  .gt-hl{background:#fff1e6;color:#c4561a;font-weight:800}
+  .gt-hl2{background:#fff8f1;color:#c4561a;font-weight:700}
+  .calc-line{background:var(--navy);color:#fff;border-radius:12px;padding:13px 16px;font-size:15px}
+  .calc-line b{color:#ffb27a}
+  .hbar{display:grid;grid-template-columns:80px 1fr 50px;gap:10px;align-items:center;font-size:14px;margin:7px 0}
+  .hbar div{background:#e3e7ec;height:16px;border-radius:8px;overflow:hidden}
+  .hbar i{display:block;height:100%;background:#7c9cc0;border-radius:8px}
+  .hbar i.o{background:var(--accent)}
+  .hbar em{font-style:normal;font-weight:700;text-align:right}
+  .gender{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .g-card{background:#fff;border-radius:14px;padding:18px;text-align:center;border-top:4px solid #3a7bd5}
+  .g-card.f{border-top-color:#f0b429}
+  .g-card small{display:block;color:var(--muted);font-size:13px}
+  .g-card b{font-size:32px;font-weight:900;color:var(--navy)}
+  .bridge{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:20px;padding:30px;margin:8px 0 40px}
+  .bridge h3{font-size:22px;margin-bottom:16px}
+  .bridge .grid>div{background:rgba(255,255,255,.1);border-radius:14px;padding:16px}
+  .bridge b{display:block;margin-bottom:4px}
+  .bridge span{font-size:14px;opacity:.85}
+  .bridge-msg{margin:20px 0;font-size:16px;line-height:1.75}
+  .bridge-msg b{color:#ffd2b0}
+  @media(max-width:860px){.need{flex-direction:column;padding:22px}.need-grid,.gender{grid-template-columns:1fr}.gt-row{font-size:13px}.gt-row span{padding:9px 6px}}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .tab{padding:10px 18px;border-radius:30px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:15px;cursor:pointer;color:var(--muted);font-family:inherit}
+  .tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .age-panel{display:none;grid-template-columns:1fr 1fr;gap:18px}
+  .age-panel.on{display:grid}
+  .age-panel .card h3 span{color:var(--accent)}
+  .point{font-size:15px;color:var(--text)!important}
+
+  .product{margin-top:30px;border:2px solid var(--accent);border-radius:20px;background:#fffaf5;padding:30px;position:relative}
+  .product .tag{position:absolute;top:-13px;left:24px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;padding:4px 12px;border-radius:20px}
+  .product h3{font-size:24px;margin-bottom:6px}
+  .product .big{font-size:46px;font-weight:900;color:var(--accent);line-height:1.1}
+  .product .big small{font-size:18px;color:var(--text);font-weight:700}
+  .product-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:28px;align-items:center}
+  .product ul{list-style:none;display:grid;gap:10px}
+  .product li{background:#fff;border:1px solid #f3dcc8;border-radius:12px;padding:12px 14px;font-size:15px}
+  .product li b{color:var(--navy)}
+  .caution{margin-top:18px;font-size:13px;color:var(--muted);background:#fff;border-radius:10px;padding:12px 14px;border:1px dashed #e2c3a8}
+
+  /* COVERAGE */
+  .check-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .check-card h3{display:flex;align-items:center;gap:8px}
+  .check-card .sub{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .chk{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+  .chk input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+  .chk b{display:block;font-size:15px}
+  .chk span{font-size:13.5px;color:var(--muted)}
+  .result{margin-top:22px;background:var(--navy);color:#fff;border-radius:16px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .result b{font-size:18px}
+  .result p{opacity:.8;font-size:14px}
+  .treat{margin-top:28px}
+  .treat table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;font-size:15px}
+  .treat th{background:var(--navy);color:#fff;padding:12px;text-align:left;font-weight:700}
+  .treat td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .treat td:first-child{font-weight:700;white-space:nowrap}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px}
+  .pill.r{background:#fde8e8;color:#c0392b}.pill.y{background:#fff4d6;color:#a5730a}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .step b{display:block;color:var(--accent);font-size:13px}
+  .step strong{display:block;margin:4px 0}
+  .step span{font-size:13.5px;color:var(--muted)}
+
+  /* CONTACT */
+  .contact{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+  .contact .sec-head p{color:rgba(255,255,255,.75)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px}
+  .contact-info a{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .contact-info small{display:block;opacity:.7;font-size:13px}
+  form{background:#fff;color:var(--text);border-radius:18px;padding:26px}
+  form label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+  form input,form select,form textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit}
+  .interest{display:flex;flex-wrap:wrap;gap:8px}
+  .interest label{margin:0;font-weight:500;border:1px solid var(--line);border-radius:20px;padding:7px 12px;display:flex;align-items:center;gap:6px;cursor:pointer}
+  .interest input{width:auto}
+  .agree{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);margin-top:14px}
+  .agree input{width:auto;margin-top:3px}
+  form .btn{width:100%;margin-top:16px;font-size:16px}
+  form .btn:disabled{opacity:.6;cursor:default}
+  .counter{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+  .turnstile{margin-top:14px}
+  .form-error{display:none;margin-top:12px;padding:10px 12px;border:1px solid var(--accent);border-radius:10px;background:var(--bg);color:var(--accent);font-size:14px;font-weight:600}
+  .form-error.on{display:block}
+  .form-done{text-align:center;padding:40px 10px}
+  .form-done b{display:block;font-size:20px;color:var(--navy);margin-bottom:6px}
+  .form-done p{color:var(--muted);font-size:15px}
+
+  footer{background:#0a1d33;color:rgba(255,255,255,.6);font-size:12.5px;padding:28px 0;line-height:1.8}
+
+  .float-cta{position:fixed;right:18px;bottom:18px;z-index:60;background:var(--accent);color:#fff;font-weight:800;padding:14px 20px;border-radius:30px;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+
+  @media(max-width:860px){
+    nav ul{display:none;position:absolute;top:62px;left:0;right:0;background:var(--navy);flex-direction:column;padding:14px 20px;gap:14px}
+    nav ul.open{display:flex}
+    .menu-btn{display:block}
+    .hero h1{font-size:28px}
+    .g2,.g3,.g4,.about,.pension-hero,.age-panel.on,.product-grid,.check-wrap,.contact-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .year-end{grid-template-columns:1fr}
+    .treat{overflow-x:auto}
+    .sec-head h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#home" class="logo">김광열 <span>팀장</span></a>
+    <nav>
+      <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+      <ul>
+        <li><a href="#about">소개·경력</a></li>
+        <li><a href="#services">상담분야</a></li>
+        <li><a href="#pension" class="new">연금</a></li>
+        <li><a href="#coverage" class="new">보장분석</a></li>
+        <li><a href="#contact">상담신청</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="badge">🎄 2026 연말 특별 점검 진행 중</div>
+    <h1>20년 현장 경험으로<br><em>내 보험, 내 노후</em>를 함께 점검합니다</h1>
+    <p>2007년부터 20년, 현대해상 전속 대리점 대표 김광열 팀장입니다. 새 보험을 권하기 전에, 지금 가진 보험부터 제대로 보는 것이 먼저라고 생각합니다.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-main">무료 상담 신청</a>
+      <a href="tel:01055472125" class="btn btn-ghost">📞 010-5547-2125</a>
+    </div>
+    <div class="year-end">
+      <a href="#pension"><b>💰 연말 연금 점검</b><small>나이대별로 지금 준비해야 할 노후 연금</small></a>
+      <a href="#coverage"><b>🩺 무료 보장분석</b><small>보험료 할인 + 최신 치료 대비 부족한 보장</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="alt" id="about">
+  <div class="wrap">
+    <div class="sec-head"><div class="kicker">ABOUT</div><h2>소개 및 경력</h2></div>
+    <div class="about">
+      <div class="profile-box">
+        <div class="name">김광열</div>
+        <div class="role">현대해상 전속 대리점 대표 · 경인지역 구월지점 팀장</div>
+        <div class="stats">
+          <div><b>2007~</b><small>20년 현장 경력</small></div>
+          <div><b>대표</b><small>전속 대리점</small></div>
+          <div><b>팀장</b><small>구월지점</small></div>
+        </div>
+        <div class="awards">
+          <div>🏆<b>연도대상</b><small>수상</small></div>
+          <div>🥇<b>최우수팀장상</b><small>수상</small></div>
+          <div>✅<b>우수인증대리점</b><small>인증</small></div>
+        </div>
+      </div>
+      <div>
+        <p class="about-lead">2007년 처음 현대해상과 인연을 맺은 뒤 20년 동안 한 회사에서 고객 곁을 지켜왔습니다. 지금은 대리점 대표이자 팀장으로서 고객 상담은 물론 후배 설계사 교육까지 책임지고 있습니다.</p>
+        <ul class="timeline">
+          <li><b>2007 · 현대해상 전속 보험설계 시작</b><span>개인 보장보험·연금·실손·자동차보험 상담</span></li>
+          <li><b>[연도] · 구월지점 팀장</b><span>신입 설계사 교육 및 팀 운영</span></li>
+          <li><b>[연도] · 현대해상 전속 대리점 대표</b><span>대리점 운영, 고객 관리 체계 구축</span></li>
+          <li class="award"><b>🏆 [연도] · 연도대상 수상</b><span>한 해 우수한 영업 성과와 고객 관리로 회사에서 선정</span></li>
+          <li class="award"><b>🥇 [연도] · 최우수팀장상 수상</b><span>팀 운영과 설계사 육성 성과 인정</span></li>
+          <li class="award"><b>✅ [연도] · 우수인증대리점 선정</b><span>계약 유지율·완전판매 등 고객 보호 기준 충족</span></li>
+          <li><b>상담 원칙</b><span>필요 없는 보험은 권하지 않습니다. 기존 보험을 먼저 봅니다.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head"><div class="kicker">SERVICES</div><h2>이런 상담을 해드립니다</h2></div>
+    <div class="grid g4">
+      <div class="card"><div class="icon">🛡️</div><h3>보장 설계</h3><p>암·뇌·심장·수술·실손 등 우리 가족 맞춤 보장</p></div>
+      <div class="card"><div class="icon">💰</div><h3>연금·노후 준비</h3><p>나이대와 소득에 맞춘 연금 준비 방법</p></div>
+      <div class="card"><div class="icon">🔍</div><h3>보장분석</h3><p>중복·부족 보장, 놓친 할인 점검</p></div>
+      <div class="card"><div class="icon">📄</div><h3>보험금 청구 안내</h3><p>청구 서류, 진행 과정 안내</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PENSION -->
+<section class="alt" id="pension">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">PENSION · 연말 연금 점검</div>
+      <h2>"국민연금 있으니 괜찮겠지"<br>정말 그럴까요? <span style="color:var(--accent)">세 가지 숫자</span>로 확인해 보세요</h2>
+      <p>겁을 드리려는 것이 아닙니다. 막연한 걱정 대신, 내 노후에 얼마가 필요하고 얼마가 비는지 숫자로 한번 보시자는 것입니다.</p>
+    </div>
+
+    <!-- 니즈 1 : 공적연금 신뢰 -->
+    <div class="need">
+      <div class="need-no">01</div>
+      <div class="need-body">
+        <h3>국민연금, 국민 절반 이상이 "믿기 어렵다"고 답했습니다</h3>
+        <div class="need-grid">
+          <div class="big-stat">
+            <div class="donut" style="--p:55.7"><span>55.7%</span></div>
+            <p>국민연금을<br><b>신뢰하지 않는다</b></p>
+          </div>
+          <div>
+            <p class="need-text">2025년 전국 성인 1,007명을 조사한 결과, 국민연금을 믿지 못한다는 응답이 <b>55.7%</b>로 믿는다(44.3%)보다 많았습니다. 특히 20~30대 사이에서는 개정 연금법에 대한 불만이 크게 나오고 있습니다.</p>
+            <p class="need-text">연금 제도는 앞으로도 계속 바뀔 수 있습니다. 바뀌는 제도에 내 노후를 전부 맡기기보다, <b>내가 직접 정할 수 있는 연금 하나</b>를 따로 마련해 두는 것이 마음 편한 방법입니다.</p>
+            <p class="src">출처: 한국경영자총협회 '2025 국민연금 현안 대국민 인식조사' (한국경제 2025.11.13 보도)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 니즈 2 : 필요 생활비 vs 국민연금 -->
+    <div class="need">
+      <div class="need-no">02</div>
+      <div class="need-body">
+        <h3>부부 적정 생활비 월 303만 원, 국민연금 평균은 월 62만 원</h3>
+        <p class="need-text">60대 부부가 생활하는 데 필요한 적정 생활비와 국민연금 평균 수령액을 비교하면, <b>매달 비는 금액</b>이 보입니다. 30년 이상 꾸준히 낸 분도 월 100만 원 이상이 부족합니다.</p>
+        <div class="gap-table">
+          <div class="gt-row gt-head"><span></span><span>60대</span><span>70대</span><span>80대 이상</span></div>
+          <div class="gt-row"><span>적정 생활비 (부부)</span><span>303만</span><span>260만</span><span>230만</span></div>
+          <div class="gt-row"><span>국민연금 전체 평균</span><span>62만</span><span>62만</span><span>62만</span></div>
+          <div class="gt-row"><span>국민연금 30년↑ 가입자 평균</span><span>157만</span><span>157만</span><span>157만</span></div>
+          <div class="gt-row gt-hl"><span>매달 부족 (전체 평균 기준)</span><span>241만</span><span>198만</span><span>168만</span></div>
+          <div class="gt-row gt-hl2"><span>매달 부족 (30년↑ 기준)</span><span>146만</span><span>103만</span><span>73만</span></div>
+        </div>
+        <div class="calc-line">💡 60대 10년 동안 매달 146만 원만 부족해도 <b>약 1억 7,500만 원</b>이 필요합니다.</div>
+        <p class="src">출처: 통계청 노후 최소·적정 생활비(2023), 네이버페이 머니스토리 국민연금 수령액 자료. 단위: 월, 원</p>
+      </div>
+    </div>
+
+    <!-- 니즈 3 : 실제 수급 현황 -->
+    <div class="need">
+      <div class="need-no">03</div>
+      <div class="need-body">
+        <h3>실제로 받는 국민연금, 가장 많은 구간은 '월 20~40만 원'</h3>
+        <div class="need-grid">
+          <div>
+            <p class="need-text">현재 국민연금을 받는 분은 약 <b>755만 명</b>입니다. 그중 가장 많은 39.4%가 월 20~40만 원을 받고, 월 60만 원 미만을 받는 분이 <b>10명 중 7명</b>에 가깝습니다.</p>
+            <div class="hbar"><span>20만 미만</span><div><i style="width:19%"></i></div><em>7.6%</em></div>
+            <div class="hbar"><span>20~40만</span><div><i style="width:100%" class="o"></i></div><em>39.4%</em></div>
+            <div class="hbar"><span>40~60만</span><div><i style="width:53%"></i></div><em>20.9%</em></div>
+            <div class="hbar"><span>60~100만</span><div><i style="width:46%"></i></div><em>18.2%</em></div>
+            <div class="hbar"><span>100만 이상</span><div><i style="width:35%"></i></div><em>13.9%</em></div>
+          </div>
+          <div class="gender">
+            <div class="g-card"><small>남성 수급자 중<br>월 60만 원 미만</small><b>50.2%</b></div>
+            <div class="g-card f"><small>여성 수급자 중<br>월 60만 원 미만</small><b>87.4%</b></div>
+            <p class="need-text" style="grid-column:1/-1;margin-top:4px">특히 여성은 가입 기간이 짧은 경우가 많아 대부분 월 60만 원에 못 미칩니다. <b>부부라면 배우자 몫의 연금도 함께</b> 챙겨야 하는 이유입니다.</p>
+          </div>
+        </div>
+        <p class="src">출처: 국민연금공단 국민연금 공표통계 (2025년 12월 기준)</p>
+      </div>
+    </div>
+
+    <!-- 연결 메시지 -->
+    <div class="bridge">
+      <h3>그래서, 왜 '지금'일까요?</h3>
+      <div class="grid g3">
+        <div><b>⏳ 은퇴는 빨라지고</b><span>퇴직 시점이 앞당겨지면서 돈을 버는 기간은 짧아지고 있습니다.</span></div>
+        <div><b>👨‍👩‍👧 자녀 독립은 늦어지고</b><span>자녀 교육·결혼 지원 기간은 길어져 내 노후 준비가 뒤로 밀리기 쉽습니다.</span></div>
+        <div><b>📅 시간은 되돌릴 수 없습니다</b><span>같은 연금액이라도 일찍 시작할수록 매달 내는 부담이 줄어듭니다.</span></div>
+      </div>
+      <p class="bridge-msg">부족한 금액을 한 번에 채울 수는 없습니다. 하지만 <b>내 나이와 형편에 맞게 지금 시작하면</b> 충분히 준비할 수 있습니다.<br>먼저 내 국민연금 예상액과 부족한 금액부터 함께 확인해 보세요.</p>
+      <a href="#contact" class="btn btn-main" onclick="preset('연금')">내 노후 부족 금액 무료로 계산받기 →</a>
+    </div>
+
+    <h3 style="margin:10px 0 14px;font-size:20px">나이대별, 지금 해야 할 연금 준비</h3>
+    <div class="tabs">
+      <button class="tab on" data-age="30">30대</button>
+      <button class="tab" data-age="40">40대</button>
+      <button class="tab" data-age="50">50대</button>
+      <button class="tab" data-age="60">60대 이상</button>
+    </div>
+
+    <div class="age-panel on" data-panel="30">
+      <div class="card"><h3>30대 · <span>시간을 사는 시기</span></h3><p class="point">적은 금액으로 길게. 납입 부담은 낮게, 기간은 길게 가져가는 것이 핵심입니다.</p></div>
+      <div class="card"><ul><li>월 소액이라도 지금 시작 (결혼·출산 후엔 여유가 줄어듭니다)</li><li>세액공제 연금저축 + 보증형 연금 함께 고려</li><li>보장보험과 연금 비율을 균형 있게</li></ul></div>
+    </div>
+    <div class="age-panel" data-panel="40">
+      <div class="card"><h3>40대 · <span>골든타임</span></h3><p class="point">소득이 가장 높고, 은퇴까지 20년 안팎 남은 시기. 연금 준비의 마지막 여유 구간입니다.</p></div>
+      <div class="card"><ul><li>국민연금 예상액 확인 후 부족분 계산</li><li>자녀 교육비와 노후 자금 분리 설계</li><li>연금 개시 전 거치 기간을 충분히 확보</li></ul></div>
+    </div>
+    <div class="age-panel" data-panel="50">
+      <div class="card"><h3>50대 · <span>지키며 채우는 시기</span></h3><p class="point">이제는 수익보다 안정. 원금과 연금액이 보증되는 구조가 중요합니다.</p></div>
+      <div class="card"><ul><li>단기납·일시납으로 집중 준비</li><li>퇴직금·목돈을 연금으로 전환하는 방법 검토</li><li>연금액 최저 보증 여부를 꼭 확인</li></ul></div>
+    </div>
+    <div class="age-panel" data-panel="60">
+      <div class="card"><h3>60대 이상 · <span>받는 방법 설계</span></h3><p class="point">이미 모은 자산을 어떻게 '평생 월급'으로 바꿀지가 핵심입니다.</p></div>
+      <div class="card"><ul><li>종신형·확정기간형 수령 방법 비교</li><li>건강보험료·세금 영향 함께 점검</li><li>배우자·상속까지 고려한 수령 설계</li></ul></div>
+    </div>
+
+    <!-- 추천 연금 (상품명 비공개 · 상담 유도형) -->
+    <div class="product" id="pension-pick">
+      <div class="tag">🎁 연말 추천 연금</div>
+      <h3 style="font-size:26px;line-height:1.4">요즘 연금, <span style="color:var(--accent)">'얼마 받을지'를 미리 보증</span>해 주는 상품이 있습니다</h3>
+      <p style="color:var(--muted);margin:6px 0 22px">수익률이 오르내려도 연금 개시 때 받을 연금의 바닥을 정해두는 '보증형 연금'. 상품마다 보증 방식이 달라 비교가 꼭 필요합니다.</p>
+
+      <div class="pick-grid">
+        <div class="pick">
+          <div class="lock">🔒 보험사·상품명은 상담 시 공개</div>
+          <div class="pick-type">TYPE A · 연금액 보증형</div>
+          <div class="big">연단리 <span>7%</span><small>연금액 산출 기준 최저 보증</small></div>
+          <ul>
+            <li>납입한 보험료에 연단리 7%를 적용한 금액을 <b>연금 산출 기준으로 최저 보증</b></li>
+            <li>종신형 선택 시 <b>평생</b> 연금 수령</li>
+            <li>은퇴 시점이 분명한 40~50대에 특히 상담이 많은 유형</li>
+          </ul>
+        </div>
+        <div class="pick">
+          <div class="lock">🔒 보험사·상품명은 상담 시 공개</div>
+          <div class="pick-type">TYPE B · 적립금 단계 보증형</div>
+          <div class="big" style="font-size:34px">3단계 <span>보증</span><small>원금 → 추가 → 장기 적립금 보증</small></div>
+          <ul>
+            <li>일정 시점에 <b>원금 100% 보증</b>, 이후 단계별로 보증 비율 상향</li>
+            <li>오래 유지할수록 보증되는 적립금이 커지는 구조</li>
+            <li>목돈을 길게 묻어둘 수 있는 분께 맞는 유형</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="why-now">
+        <b>⏰ 왜 '지금' 확인해 보셔야 할까요?</b>
+        <p>연금의 보증 조건과 적용이율은 시장금리, 제도 변화, 보험사 사정에 따라 <b>언제든 바뀔 수 있습니다.</b> 그리고 연금은 <b>가입할 때의 조건이 계약 기간 내내 적용</b>됩니다. 지금 조건이 어떤지, 내 나이에 어느 유형이 맞는지 한 번 비교해 보시는 것만으로도 충분히 의미가 있습니다.</p>
+      </div>
+
+      <div class="pick-cta">
+        <div>
+          <b>어느 보험사의 어떤 상품인지 궁금하시죠?</b>
+          <span>내 나이·납입 가능 금액으로 예상 연금액까지 직접 계산해 드립니다. 상담만 받으셔도 됩니다.</span>
+        </div>
+        <a href="#contact" class="btn btn-big" onclick="preset('연금')">📩 상담문의 신청하기</a>
+      </div>
+
+      <div class="caution">
+        ※ '연단리 7%'는 연금 개시 시 연금액 계산에 적용되는 <b>최저 보증 기준</b>이며, 적립금에 매년 7% 이자가 붙는 확정금리가 아닙니다. 보증 조건·보증비용·가입 조건은 상품별로 다르며, 중도 해지 시 보증이 적용되지 않고 해지환급금은 납입보험료보다 적을 수 있습니다. 구체적인 상품은 상담 시 상품설명서·약관과 함께 안내해 드립니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section id="coverage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">COVERAGE CHECK · 무료 보장분석</div>
+      <h2>새 보험보다 먼저,<br>지금 가진 보험을 점검해 보세요</h2>
+      <p>놓치고 있는 보험료 할인은 없는지, 10년 전 가입한 보장이 지금의 병원 치료를 따라가고 있는지 확인해 드립니다.</p>
+    </div>
+
+    <div class="check-wrap">
+      <div class="card check-card">
+        <h3>💸 받을 수 있는 보험료 할인</h3>
+        <p class="sub">해당되는 항목을 체크해 보세요</p>
+        <label class="chk"><input type="checkbox"><div><b>건강체·무사고 할인</b><span>일정 기간 입원·수술 이력이 없으면 할인되거나, 보험료가 낮은 상품으로 전환할 수 있는 경우</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>실손보험 비급여 할인·할증</b><span>4세대 실손은 전년도 비급여 이용 실적에 따라 갱신 보험료가 달라집니다</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>다자녀·임산부·장애인 할인</b><span>가족 상황에 따라 적용되는 특약 할인 확인</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>자동차보험 할인 특약</b><span>마일리지, 자녀, 안전운전, 블랙박스 등</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>중복 가입 정리</b><span>실손 중복, 같은 보장 여러 건 → 보험료 절감</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>갱신형 보험료 점검</b><span>갱신 때마다 오르는 특약, 비갱신으로 정리 가능 여부</span></div></label>
+      </div>
+
+      <div class="card check-card">
+        <h3>🏥 최신 치료법 대비 내 보장은?</h3>
+        <p class="sub">예전 보험은 진단비 중심이라 최신 치료비가 빠져 있는 경우가 많습니다</p>
+        <label class="chk"><input type="checkbox"><div><b>표적·면역 항암치료</b><span>비급여 고가 항암제 치료비를 따로 보장받나요?</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>양성자·중입자 방사선</b><span>일반 방사선과 비용 차이가 큰 치료</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>로봇수술·다빈치</b><span>수술비 특약에 포함되어 있나요?</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>뇌·심장 진단 범위</b><span>뇌출혈만? 뇌혈관질환 전체? 급성심근경색만? 허혈성 전체?</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>간병인·간호간병 통합서비스</b><span>입원 시 하루 간병비 부담 대비</span></div></label>
+        <label class="chk"><input type="checkbox"><div><b>통원·검사·주사 치료</b><span>입원 없이 통원으로 끝나는 치료가 늘었습니다</span></div></label>
+      </div>
+    </div>
+
+    <div class="result">
+      <div><b id="resultTitle">체크한 항목: 0개</b><p id="resultText">항목을 체크하면 점검이 필요한 정도를 알려드립니다.</p></div>
+      <a href="#contact" class="btn btn-main" onclick="preset('보장분석')">무료 보장분석 신청</a>
+    </div>
+
+    <div class="treat">
+      <h3 style="margin:34px 0 14px;font-size:20px">예전 보험 vs 지금의 병원 치료</h3>
+      <table>
+        <tr><th>구분</th><th>예전 가입 보험에서 흔한 구조</th><th>요즘 치료 현실</th><th>점검</th></tr>
+        <tr><td>암</td><td>진단비 1회 지급 중심</td><td>표적·면역항암, 양성자 등 치료 기간이 길고 비급여 비중 큼</td><td><span class="pill r">우선 점검</span></td></tr>
+        <tr><td>뇌</td><td>뇌출혈·뇌경색 진단비만</td><td>뇌혈관질환 전체로 진단 범위 넓혀야 보장 공백 줄어듦</td><td><span class="pill r">우선 점검</span></td></tr>
+        <tr><td>심장</td><td>급성심근경색만</td><td>협심증 등 허혈성 심장질환, 부정맥 시술 증가</td><td><span class="pill y">확인 필요</span></td></tr>
+        <tr><td>수술</td><td>1~5종 수술비</td><td>로봇수술, 내시경·복강경 등 최소침습 수술 확대</td><td><span class="pill y">확인 필요</span></td></tr>
+        <tr><td>입원</td><td>입원일당</td><td>입원 기간은 짧아지고 간병비 부담은 커짐</td><td><span class="pill y">확인 필요</span></td></tr>
+      </table>
+    </div>
+
+    <div class="steps">
+      <div class="step"><b>STEP 1</b><strong>상담 신청</strong><span>전화·문자·아래 신청서</span></div>
+      <div class="step"><b>STEP 2</b><strong>가입 내역 조회</strong><span>동의 후 전 보험사 가입 내역 확인</span></div>
+      <div class="step"><b>STEP 3</b><strong>분석 리포트</strong><span>중복·부족·할인 항목 정리</span></div>
+      <div class="step"><b>STEP 4</b><strong>1:1 설명</strong><span>유지할 것, 정리할 것 안내</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head"><div class="kicker">CONTACT</div><h2>궁금한 점, 편하게 물어보세요</h2><p>상담은 무료이며, 상담 후 가입을 강요하지 않습니다.</p></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a href="tel:01055472125"><span style="font-size:24px">📞</span><div><small>전화 상담</small><b>010-5547-2125</b></div></a>
+        <a href="sms:01055472125"><span style="font-size:24px">💬</span><div><small>문자 문의</small><b>문자로 남겨주세요</b></div></a>
+        <a href="mailto:kwang10@hi.co.kr"><span style="font-size:24px">✉️</span><div><small>이메일</small><b>kwang10@hi.co.kr</b></div></a>
+        <a href="https://naver.me/xX7aoF3h" target="_blank" rel="noopener noreferrer"><span style="font-size:24px">📍</span><div><small>지점</small><b>현대해상 경인지역 구월지점</b></div></a>
+      </div>
+      <form id="form" onsubmit="return sendForm(event)">
+        <label>성함</label><input id="fName" required maxlength="30" placeholder="홍길동">
+        <label>연락처</label><input id="fPhone" required maxlength="20" placeholder="010-0000-0000">
+        <label>연령대</label>
+        <select id="fAge"><option>30대</option><option>40대</option><option>50대</option><option>60대 이상</option><option>20대</option></select>
+        <label>상담 분야</label>
+        <div class="interest">
+          <label><input type="checkbox" name="it" value="연금"> 연금</label>
+          <label><input type="checkbox" name="it" value="보장분석"> 보장분석</label>
+          <label><input type="checkbox" name="it" value="보험금 청구"> 보험금 청구</label>
+          <label><input type="checkbox" name="it" value="신규 보장설계"> 신규 보장설계</label>
+        </div>
+        <label>문의 내용 (선택)</label><textarea id="fMsg" rows="3" maxlength="500" placeholder="편한 상담 시간 등을 남겨주세요"></textarea>
+        <div class="counter"><span id="fMsgCount">0</span> / 500</div>
+        <div class="agree"><input type="checkbox" id="fAgree"><span>상담을 위한 개인정보(성함·연락처·연령대) 수집·이용에 동의합니다. 수집 목적: 보험 상담 / 보유 기간: 상담 완료 후 즉시 파기(미완료 시 최대 1년)</span></div>
+        <div id="turnstile" class="turnstile"></div>
+        <div id="formError" class="form-error" role="alert"></div>
+        <button class="btn btn-main" type="submit" id="fSubmit">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    김광열 | 현대해상 전속 대리점 대표 · 경인지역 구월지점 팀장 | 010-5547-2125<br>
+    보험계약자가 기존 보험계약을 해지하고 새로운 보험계약을 체결하는 과정에서 질병이력, 연령증가 등으로 가입이 거절되거나 보험료가 인상될 수 있으며, 보장 내용이 달라질 수 있습니다.<br>
+    이 보험계약은 예금자보호법에 따라 예금보험공사가 보호하되, 보호 한도는 본 보험회사에 있는 귀하의 모든 예금보호 대상 금융상품의 해지환급금(또는 만기 시 보험금이나 사고보험금)에 기타 지급금을 합하여 1인당 "[금액 입력]"이며, 초과 금액은 보호하지 않습니다.<br>
+    가입 전 상품설명서 및 약관을 반드시 읽어보시기 바랍니다. | 광고심의필 제 [번호 입력] 호 ([기간 입력])
+  </div>
+</footer>
+
+<a href="#contact" class="float-cta">무료 상담</a>
+
+<script>
+  // 나이대 탭
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.age-panel').forEach(x=>x.classList.remove('on'));
+    t.classList.add('on');
+    document.querySelector('[data-panel="'+t.dataset.age+'"]').classList.add('on');
+  });
+  // 보장분석 체크 결과
+  const boxes=document.querySelectorAll('#coverage .chk input');
+  boxes.forEach(b=>b.onchange=()=>{
+    const n=[...boxes].filter(x=>x.checked).length;
+    document.getElementById('resultTitle').textContent='체크한 항목: '+n+'개';
+    document.getElementById('resultText').textContent =
+      n===0?'항목을 체크하면 점검이 필요한 정도를 알려드립니다.':
+      n<=3?'몇 가지 확인해 볼 부분이 있습니다. 가볍게 점검받아 보세요.':
+      n<=7?'할인 누락이나 보장 공백이 있을 가능성이 있습니다. 보장분석을 권해드립니다.':
+      '점검이 꼭 필요해 보입니다. 지금 가입하신 보험부터 함께 정리해 드리겠습니다.';
+  });
+  // 상담 분야 미리 체크
+  function preset(v){document.querySelectorAll('input[name=it]').forEach(i=>{if(i.value===v)i.checked=true});}
+  // 문의 내용 글자 수
+  fMsg.addEventListener('input',()=>{fMsgCount.textContent=fMsg.value.length});
+  // 자동 입력 방지(Cloudflare Turnstile). 사이트 키는 서버 설정에서 받는다.
+  let tsWidget=null;
+  window.onTurnstileLoad=async()=>{
+    try{
+      const {turnstileSiteKey}=await (await fetch('/api/config')).json();
+      if(!turnstileSiteKey) return;
+      const el=document.getElementById('turnstile');
+      tsWidget=turnstile.render(el,{sitekey:turnstileSiteKey,size:el.clientWidth>=300?'flexible':'compact'});
+    }catch(e){}
+  };
+  // 신청서 → 서버에 저장하고 담당자에게 메일로 알림
+  function showError(msg){formError.textContent=msg;formError.classList.add('on');}
+  async function sendForm(e){
+    e.preventDefault();
+    formError.classList.remove('on');
+    if(!fAgree.checked){showError('개인정보 수집·이용에 동의해 주세요.');fAgree.focus();return false;}
+    const token=tsWidget!==null?turnstile.getResponse(tsWidget):'';
+    if(!token){showError('자동 입력 방지 확인이 끝난 뒤 다시 눌러 주세요.');return false;}
+    fSubmit.disabled=true;fSubmit.textContent='신청 중…';
+    let msg='신청을 보내지 못했습니다. 잠시 후 다시 시도하시거나 전화·문자로 문의해 주세요.';
+    try{
+      const res=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        name:fName.value,phone:fPhone.value,ageGroup:fAge.value,
+        interests:[...document.querySelectorAll('input[name=it]:checked')].map(i=>i.value),
+        message:fMsg.value,agree:fAgree.checked,turnstileToken:token})});
+      const data=await res.json().catch(()=>({}));
+      if(res.ok){
+        form.innerHTML='<div class="form-done" tabindex="-1"><b>상담 신청이 접수되었습니다</b><p>남겨주신 연락처로 연락드리겠습니다.</p></div>';
+        form.firstChild.focus();
+        return false;
+      }
+      if(res.status<500&&data.message) msg=data.message;
+    }catch(err){}
+    showError(msg);
+    if(tsWidget!==null) turnstile.reset(tsWidget);
+    fSubmit.disabled=false;fSubmit.textContent='상담 신청하기';
+    return false;
+  }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" async defer></script>
+</body>
+</html>

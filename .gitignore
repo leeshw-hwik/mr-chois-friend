@@ -1,0 +1,12 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# 패키지·로컬 개발 산출물
+node_modules/
+.wrangler/
+.dev.vars
+
+# 비밀 값·OS 파일
+.env*
+task/.env*
+.DS_Store

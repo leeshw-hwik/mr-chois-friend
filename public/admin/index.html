@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>상담 신청 관리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  /* public/index.html과 같은 색 변수 */
+  :root{
+    --navy:#0f2a47; --navy2:#173a60; --accent:#e8792b; --teal:#1f8a8a;
+    --bg:#f6f7f9; --card:#fff; --text:#1c2430; --muted:#5d6878; --line:#e3e7ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--text);background:var(--bg);line-height:1.6;word-break:keep-all}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  header{position:sticky;top:0;z-index:10;background:var(--navy);color:#fff}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .logo{font-weight:800;font-size:17px}
+  .logo span{color:var(--accent)}
+  header a.logout{font-size:14px;opacity:.85;padding:10px 0}
+  header a.logout:hover{opacity:1;color:var(--accent)}
+
+  main.wrap{padding-top:28px;padding-bottom:60px}
+  .page-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
+  .page-head h1{font-size:22px;font-weight:800}
+  .page-head small{color:var(--muted);font-size:14px}
+  .notice{margin-bottom:14px;padding:12px 14px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:14px}
+  .notice.err{border-color:var(--accent);color:var(--accent);font-weight:600}
+
+  /* 목록 */
+  .list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .row{display:grid;grid-template-columns:140px 90px 130px 80px 1fr 90px 150px;gap:10px;align-items:center;padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+  .row.head{border-top:0;background:var(--bg);color:var(--muted);font-weight:700;font-size:13px}
+  a.row:hover{background:var(--bg)}
+  .row .name{font-weight:700}
+  .row .lbl{display:none}
+  .empty{padding:40px 18px;text-align:center;color:var(--muted)}
+  .more[hidden]{display:none}
+  .more{display:block;width:100%;margin-top:12px;padding:13px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:15px;font-weight:700;cursor:pointer}
+
+  /* 배지 */
+  .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+  .st-new{background:var(--accent);color:#fff}
+  .st-planned{background:var(--teal);color:#fff}
+  .st-done{background:var(--line);color:var(--muted)}
+  .rt-soon{border:1px solid var(--accent);color:var(--accent)}
+  .rt-over{background:var(--accent);color:#fff}
+
+  /* 상세 */
+  .back{display:inline-block;padding:10px 0;margin-bottom:6px;color:var(--muted);font-size:15px;font-weight:600}
+  .back:hover{color:var(--navy)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px}
+  .field{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
+  .field:first-child{border-top:0}
+  .field dt{color:var(--muted);font-weight:600}
+  .field dd{white-space:pre-wrap;overflow-wrap:anywhere}
+  .field dd a{color:var(--navy);font-weight:700}
+  .field .sub{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .btn{min-height:44px;padding:11px 20px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+  .btn.on{background:var(--navy);border-color:var(--navy);color:#fff;cursor:default}
+  .btn.danger{margin-left:auto;border-color:var(--accent);color:var(--accent)}
+  .btn:disabled{opacity:.6}
+
+  @media(max-width:860px){
+    .row.head{display:none}
+    .row{grid-template-columns:1fr auto;gap:4px 10px;padding:14px 16px}
+    .row .when{grid-column:1/-1;color:var(--muted);font-size:13px}
+    .row .name{grid-column:1}
+    .row .status{grid-column:2;grid-row:2;justify-self:end}
+    .row .phone,.row .age,.row .interests{grid-column:1/-1;color:var(--muted)}
+    .row .lbl{display:inline;color:var(--muted);margin-right:6px}
+    .row .retention{grid-column:1/-1}
+    .row .retention:empty{display:none}
+    .field{grid-template-columns:1fr;gap:2px}
+    .btn.danger{margin-left:0}
+    .actions .btn{flex:1}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#/">김광열 팀장 <span>상담 신청 관리</span></a>
+    <a class="logout" href="/cdn-cgi/access/logout">로그아웃</a>
+  </div>
+</header>
+<main class="wrap" id="app" aria-live="polite"></main>
+
+<script>
+  const app=document.getElementById('app');
+  const API='/api/admin/consultations';
+  let flash='';   // 화면을 바꾼 뒤 한 번 보여 줄 안내
+
+  // 요소 만들기: 문자열 자식은 텍스트로만 넣는다(입력값을 HTML로 해석하지 않음)
+  function h(tag,attrs,...kids){
+    const el=document.createElement(tag);
+    for(const [k,v] of Object.entries(attrs||{})){
+      if(v==null||v===false) continue;
+      if(k.startsWith('on')) el.addEventListener(k.slice(2),v); else el.setAttribute(k,v===true?'':v);
+    }
+    for(const kid of kids.flat()) if(kid!=null&&kid!==false) el.append(kid instanceof Node?kid:String(kid));
+    return el;
+  }
+  function kst(iso){
+    if(!iso) return '';
+    const d=new Date(new Date(iso).getTime()+9*3600*1000), p=n=>String(n).padStart(2,'0');
+    return `${d.getUTCFullYear()}-${p(d.getUTCMonth()+1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}`;
+  }
+  function kstDate(iso){return kst(iso).slice(0,10);}
+  async function api(path,opts={}){
+    const res=await fetch(path,{credentials:'same-origin',...opts,headers:{'Content-Type':'application/json',...(opts.headers||{})}});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.message||(res.status===403?'관리자 로그인이 필요합니다.':'요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.'));
+    return data;
+  }
+  function statusBadge(item){return h('span',{class:'badge st-'+item.status},item.statusLabel);}
+  // 개인정보 보유 기간: 상담 완료 후 즉시 파기, 미완료 시 최대 1년. 1개월 이내·초과면 삭제 권장
+  function retentionBadge(r){
+    if(r.state==='ok') return null;
+    const days=Math.ceil((new Date(r.deadline)-Date.now())/86400000);
+    const text=r.reason==='done'?'삭제 권장 · 상담 완료':r.reason==='expired'?'삭제 권장 · 보유 기간 초과':`삭제 권장 · 기한 D-${days}`;
+    return h('span',{class:'badge rt-'+r.state},text);
+  }
+  function notice(){
+    if(!flash) return null;
+    const n=h('div',{class:'notice'},flash); flash=''; return n;
+  }
+  function errorView(msg){app.replaceChildren(h('div',{class:'notice err'},msg));}
+
+  // 목록
+  async function showList(){
+    document.title='상담 신청 관리';
+    const box=h('div',{class:'list'},
+      h('div',{class:'row head'},['신청 일시','성함','연락처','연령대','상담 분야','상태','보유 기간'].map(t=>h('span',{},t))));
+    const head=h('div',{class:'page-head'},h('h1',{},'상담 신청 목록'),h('small',{}));
+    const more=h('button',{class:'more',type:'button',hidden:true},'더 보기');
+    app.replaceChildren(...[notice(),head,box,more].filter(Boolean));
+
+    let before=null;
+    async function load(){
+      more.disabled=true;
+      try{
+        const data=await api(API+(before?`?beforeAt=${encodeURIComponent(before.at)}&beforeId=${before.id}`:''));
+        head.lastChild.textContent='총 '+data.total+'건 · 최근 신청 순';
+        if(!data.items.length&&!before) box.append(h('div',{class:'empty'},'아직 상담 신청이 없습니다.'));
+        for(const it of data.items){
+          box.append(h('a',{class:'row',href:'#/'+it.id},
+            h('span',{class:'when'},kst(it.createdAt)),
+            h('span',{class:'name'},it.name),
+            h('span',{class:'phone'},h('span',{class:'lbl'},'연락처'),it.phone),
+            h('span',{class:'age'},h('span',{class:'lbl'},'연령대'),it.ageGroup),
+            h('span',{class:'interests'},h('span',{class:'lbl'},'상담 분야'),it.interests||'-'),
+            h('span',{class:'status'},statusBadge(it)),
+            h('span',{class:'retention'},retentionBadge(it.retention))));
+          before={at:it.createdAt,id:it.id};
+        }
+        more.hidden=!data.hasMore;
+      }catch(e){errorView(e.message);}
+      more.disabled=false;
+    }
+    more.addEventListener('click',load);
+    await load();
+  }
+
+  // 상세
+  async function showDetail(id){
+    let item;
+    try{ item=(await api(API+'/'+id)).item; }
+    catch(e){ app.replaceChildren(h('a',{class:'back',href:'#/'},'← 목록으로'),h('div',{class:'notice err'},e.message)); return; }
+    document.title=item.name+' · 상담 신청 관리';
+
+    const r=item.retention;
+    const rtText=r.reason==='done'?'상담 완료 — 즉시 파기 대상입니다. 신청 내역을 삭제해 주세요.'
+      :r.reason==='expired'?`보유 기한(${kstDate(r.deadline)})이 지났습니다. 신청 내역을 삭제해 주세요.`
+      :r.reason==='soon'?`보유 기한(${kstDate(r.deadline)})이 1개월 안으로 다가왔습니다. 상담을 마치고 삭제해 주세요.`
+      :`보유 기한 ${kstDate(r.deadline)} (신청일로부터 1년)`;
+    const mailText={sent:'발송됨',failed:'발송 실패 — 메일 설정을 확인해 주세요.',pending:'발송 중'}[item.emailStatus];
+
+    const field=(k,...v)=>h('div',{class:'field'},h('dt',{},k),h('dd',{},...v));
+    const setStatus=async(status,btn)=>{
+      btn.disabled=true;
+      try{ await api(API+'/'+id,{method:'PATCH',body:JSON.stringify({status})}); flash=`'${btn.textContent}'(으)로 표시했습니다.`; showDetail(id); }
+      catch(e){ flash=e.message; showDetail(id); }
+    };
+    const statusBtn=(status,label)=>{
+      const on=item.status===status;
+      const b=h('button',{class:'btn'+(on?' on':''),type:'button','aria-pressed':String(on),disabled:on},label);
+      b.addEventListener('click',()=>setStatus(status,b));
+      return b;
+    };
+    const del=h('button',{class:'btn danger',type:'button'},'신청 내역 삭제');
+    del.addEventListener('click',async()=>{
+      if(!confirm(`${item.name}님의 신청 내역을 삭제할까요?\n삭제하면 되돌릴 수 없습니다.`)) return;
+      del.disabled=true;
+      try{ await api(API+'/'+id,{method:'DELETE'}); flash=`${item.name}님의 신청 내역을 삭제했습니다.`; location.hash='#/'; }
+      catch(e){ flash=e.message; showDetail(id); }
+    });
+
+    app.replaceChildren(...[
+      h('a',{class:'back',href:'#/'},'← 목록으로'),
+      notice(),
+      h('div',{class:'page-head'},h('h1',{},item.name+'님 상담 신청'),statusBadge(item)),
+      h('dl',{class:'card'},
+        field('신청 일시',kst(item.createdAt)),
+        field('성함',item.name),
+        field('연락처',h('a',{href:'tel:'+item.phone.replace(/-/g,'')},item.phone)),
+        field('연령대',item.ageGroup),
+        field('상담 분야',item.interests||'선택 안 함'),
+        field('문의 내용',item.message||'(없음)'),
+        field('상태',item.statusLabel,item.statusUpdatedAt?h('span',{class:'sub'},kst(item.statusUpdatedAt)+' 변경'):null),
+        field('메일 알림',mailText),
+        field('개인정보 보유',retentionBadge(r),retentionBadge(r)?' ':'',rtText)),
+      h('div',{class:'actions'},statusBtn('planned','상담 예정'),statusBtn('done','상담 완료'),del),
+    ].filter(Boolean));
+  }
+
+  function route(){
+    const m=location.hash.match(/^#\/(\d+)$/);
+    window.scrollTo(0,0);
+    m?showDetail(m[1]):showList();
+  }
+  addEventListener('hashchange',route);
+  route();
+</script>
+</body>
+</html>

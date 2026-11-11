@@ -1,0 +1,14 @@
+{
+  "name": "mr-chois-friend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "dev": "wrangler pages dev",
+    "preview:email": "node scripts/preview-email.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.160.0"
+  }
+}

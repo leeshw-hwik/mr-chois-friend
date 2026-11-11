@@ -1,0 +1,15 @@
+# 로컬 개발용. `cp .dev.vars.example .dev.vars` 후 사용. .dev.vars는 커밋하지 않는다.
+
+# Turnstile 테스트 키(항상 통과). 운영 키는 Cloudflare 대시보드에서 발급
+TURNSTILE_SITE_KEY=1x00000000000000000000AA
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+
+# 메일(Resend). 비워 두면 메일을 보내지 않고 발송 결과를 '실패'로 기록
+RESEND_API_KEY=
+MAIL_FROM=
+CONSULT_TO_EMAIL=
+
+# 관리자 인증(Cloudflare Access). 로컬에서는 아래 우회 값을 쓰고, localhost에서만 동작함
+ACCESS_TEAM_DOMAIN=
+ACCESS_AUD=
+ADMIN_DEV_BYPASS=true

@@ -1,0 +1,15 @@
+# Cloudflare Pages 설정. pages_build_output_dir가 있으면 이 파일이 배포 설정의 기준이 된다.
+name = "mr-chois-friend"
+pages_build_output_dir = "./public"
+compatibility_date = "2025-09-01"
+
+# 상담 신청 저장소. database_id는 `npx wrangler d1 create mr-chois-friend-db` 결과 값으로 바꾼다.
+[[d1_databases]]
+binding = "DB"
+database_name = "mr-chois-friend-db"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# 비밀 값·환경별 값은 이 파일에 쓰지 않는다(README 배포 절차 참고).
+# RESEND_API_KEY, MAIL_FROM, CONSULT_TO_EMAIL,
+# TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY, ACCESS_TEAM_DOMAIN, ACCESS_AUD
