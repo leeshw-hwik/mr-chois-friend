@@ -619,6 +619,7 @@
     if(!list) return;
     list.replaceChildren(...items.map(t=>Object.assign(document.createElement('li'),{textContent:t})));
     document.getElementById('fCoverage').hidden=!items.length;
+    if(items.length) preset('보장분석'); // 1개라도 체크하면 상담 분야 '보장분석' 자동 체크
   }
   // 상담 분야 미리 체크
   function preset(v){document.querySelectorAll('input[name=it]').forEach(i=>{if(i.value===v)i.checked=true});}
